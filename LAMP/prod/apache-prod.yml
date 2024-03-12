@@ -8,7 +8,7 @@ services:
         volumes:
             - ./app:/app
             - ./apache/configuracion.lan.conf:/etc/apache2/sites-enabled/configuracion.lan.conf
-            - ./certificados/${SSLCertificateFile}:/etc/ssl/certs/${SSLCertificateFile}
-            - ./certificados/${SSLCertificateKeyFile}:/etc/ssl/private/${SSLCertificateKeyFile}
+            - ./certificados/${SSL_CERT}:/etc/ssl/certs/${SSL_CERT}
+            - ./certificados/${SSL_KEY}:/etc/ssl/private/${SSL_KEY}
         env_file:
             - .env
