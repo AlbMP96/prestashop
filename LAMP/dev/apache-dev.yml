@@ -1,0 +1,33 @@
+version: '3'
+services:
+    web:
+        build: apache
+        ports:
+            - 80:80
+            - 443:443
+        volumes:
+            - ./app:/app
+            - ./apache/configuracion.lan.conf:/etc/apache2/sites-enabled/configuracion.lan.conf
+            - ./certificados/${SSLCertificateFile}:/etc/ssl/certs/${SSLCertificateFile}
+            - ./certificados/${SSLCertificateKeyFile}:/etc/ssl/private/${SSLCertificateKeyFile}
+        env_file:
+            - .env
+
+    basedatos:
+        image: mysql:8.3
+        env_file:
+            - .env_db
+        volumes:
+            - datos:/var/lib/mysql
+            - ./db:/docker-entrypoint-initdb.d
+            - ./db:/backup
+
+    phpmyadmin:
+        image: phpmyadmin
+        ports:
+            - 8000:80
+        env_file:
+            - .env_phpmyadmin
+
+volumes:
+    datos:

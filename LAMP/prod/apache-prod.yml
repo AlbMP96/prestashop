@@ -1,0 +1,14 @@
+version: '3'
+services:
+    web:
+        build: apache
+        ports:
+            - 80:80
+            - 443:443
+        volumes:
+            - ./app:/app
+            - ./apache/configuracion.lan.conf:/etc/apache2/sites-enabled/configuracion.lan.conf
+            - ./certificados/${SSLCertificateFile}:/etc/ssl/certs/${SSLCertificateFile}
+            - ./certificados/${SSLCertificateKeyFile}:/etc/ssl/private/${SSLCertificateKeyFile}
+        env_file:
+            - .env
