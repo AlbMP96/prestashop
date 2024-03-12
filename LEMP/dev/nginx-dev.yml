@@ -22,7 +22,7 @@ services:
     basedatos:
         image: mysql:8.3
         env_file:
-            - .env_db
+            - .env
         volumes:
             - datos:/var/lib/mysql
             - ./db:/docker-entrypoint-initdb.d
@@ -33,7 +33,7 @@ services:
         ports:
             - 8000:80
         env_file:
-            - .env_phpmyadmin
+            - .env
 
 volumes:
     datos:
